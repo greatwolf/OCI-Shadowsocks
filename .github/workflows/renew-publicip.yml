@@ -32,8 +32,10 @@ jobs:
         uses: mxschmitt/action-tmate@v3.17
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
 
-      # Runs a set of commands using the runners shell
+      - name: Install Lua
+        run: apt-get install lua5.4
+
       - name: Install OCI
         run: |
-          curl https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh
+          wget https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh
           bash install.sh --accept-all-defaults
