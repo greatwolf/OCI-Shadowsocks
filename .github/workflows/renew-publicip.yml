@@ -33,7 +33,7 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
 
       - name: Install Lua
-        run: apt-get install lua5.4
+        run: sudo apt-get install lua5.4
 
       - name: Install OCI
         run: |
