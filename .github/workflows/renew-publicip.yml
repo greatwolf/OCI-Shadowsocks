@@ -26,6 +26,12 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: Debugging with tmate
+        uses: mxschmitt/action-tmate@v3.17
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
+        with:
+          detached: true
+
       - name: Install Lua
         run: sudo apt-get install lua5.4
 
@@ -36,6 +42,3 @@ jobs:
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      - name: Debugging with tmate
-        uses: mxschmitt/action-tmate@v3.17
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
