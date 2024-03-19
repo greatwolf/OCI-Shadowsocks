@@ -9,4 +9,4 @@ sh 'wget -O dkjson.lua http://dkolf.de/src/dkjson-lua.fsl/raw/dkjson.lua?name=6c
 sh 'wget https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh'
 sh 'bash install.sh --accept-all-defaults'
 
-print(os.getenv "JSON_SECRETS")
+print("env JSON_SECRETS:", os.getenv "JSON_SECRETS")
