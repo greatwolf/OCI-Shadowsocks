@@ -37,7 +37,6 @@ jobs:
       - name: Install Lua
         run: sudo apt-get install lua5.4
 
-      - name: Install OCI
+      - name: Prep CI environment
         run: |
-          wget https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh
-          bash install.sh --accept-all-defaults
+          lua prep-ci_env.lua
