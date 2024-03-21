@@ -41,4 +41,4 @@ jobs:
 
       - name: Prep CI environment
         run: |
-          lua prep-ci_env.lua
+          lua prep-ci.lua
