@@ -9,6 +9,8 @@ sh 'wget -O dkjson.lua http://dkolf.de/src/dkjson-lua.fsl/raw/dkjson.lua?name=6c
 sh 'wget https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh'
 sh 'bash install.sh --accept-all-defaults'
 
+sh 'mkdir -p ~/.oci'
+
 -- Copy OCI config to right place
 sh 'cp ./config ~/.oci/'
 
