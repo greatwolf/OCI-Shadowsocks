@@ -10,7 +10,7 @@ sh 'wget https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install
 sh 'bash install.sh --accept-all-defaults'
 
 -- Copy OCI config to right place
-sh 'cp ./config ~/.oci'
+sh 'cp ./config ~/.oci/'
 
 -- Copy OCI ssh privatekey auth to right place
 json = require 'dkjson'
