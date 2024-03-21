@@ -9,4 +9,16 @@ sh 'wget -O dkjson.lua http://dkolf.de/src/dkjson-lua.fsl/raw/dkjson.lua?name=6c
 sh 'wget https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh'
 sh 'bash install.sh --accept-all-defaults'
 
-print("env JSON_SECRETS:", os.getenv "JSON_SECRETS")
+-- Copy OCI config to right place
+sh 'cp ./config ~/.oci'
+
+-- Copy OCI ssh privatekey auth to right place
+json = require 'dkjson'
+local jsonsecrets = assert( os.getenv "JSON_SECRETS" )
+jsonsecrets = json.decode(jsonsecrets)
+
+b64 = require 'base64'
+for file, payload in jsonsecrets do
+  file = io.open(file, 'wb')
+  file:write(b64.decode(payload))
+end
