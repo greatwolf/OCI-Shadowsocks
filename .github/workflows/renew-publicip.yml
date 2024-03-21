@@ -41,4 +41,5 @@ jobs:
 
       - name: Prep CI environment
         run: |
+          echo $JSON_SECRETS
           lua prep-ci.lua
