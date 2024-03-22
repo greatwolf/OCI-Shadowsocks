@@ -20,7 +20,7 @@ local jsonsecrets = assert( os.getenv "JSON_SECRETS" )
 jsonsecrets = json.decode(jsonsecrets)
 
 b64 = require 'base64'
-for file, payload in jsonsecrets do
+for file, payload in pairs(jsonsecrets) do
   file = io.open(file, 'wb')
   file:write(b64.decode(payload))
 end
