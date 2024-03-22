@@ -1,4 +1,4 @@
-# Basic CI workflow to release and renew an Oracle Cloud compute server.
+# CI workflow to release and renew the public ip of an Oracle Cloud compute server.
 
 name: CI
 
