@@ -19,6 +19,14 @@ json = require 'dkjson'
 local jsonsecrets = assert( os.getenv "JSON_SECRETS" )
 jsonsecrets = json.decode(jsonsecrets)
 
+-- Replace '~' with HOME directory
+local home = sh.env "HOME"
+for file, payload in pairs(jsonsecrets) do
+  local newfile = file:gsub("^~", home)
+  jsonsecrets[newfile], jsonsecrets[file] = payload, nil
+end
+
+-- Write output files from CI secrets
 b64 = require 'base64'
 for file, payload in pairs(jsonsecrets) do
   file = assert( io.open(file, 'wb') )
