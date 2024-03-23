@@ -1,5 +1,10 @@
 -- Convenience functions for running shell commands
-sh    = os.execute
+sh = setmetatable({}, {})
+sh.env = os.getenv
+getmetatable(sh).__call = function(_, ...)
+  return os.execute(...)
+end
+
 shout = function(cmd)
   local out = assert(io.popen(cmd)):read '*all'
   assert(type(out) == 'string')
