@@ -9,26 +9,29 @@ sh 'wget -O dkjson.lua http://dkolf.de/src/dkjson-lua.fsl/raw/dkjson.lua?name=6c
 sh 'wget https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh'
 sh 'bash install.sh --accept-all-defaults'
 
-sh 'mkdir -p ~/.oci'
-
 -- Copy OCI config to right place
+sh 'mkdir -p ~/.oci'
 sh 'cp ./config ~/.oci/'
 
 -- Copy OCI ssh privatekey auth to right place
 json = require 'dkjson'
-local jsonsecrets = assert( os.getenv "JSON_SECRETS" )
-jsonsecrets = json.decode(jsonsecrets)
+local ocisecrets = assert(json.decode(os.getenv "OCI_SECRETS"))
 
 -- Replace '~' with HOME directory
-local home = sh.env "HOME"
-for file, payload in pairs(jsonsecrets) do
-  local newfile = file:gsub("^~", home)
-  jsonsecrets[newfile], jsonsecrets[file] = payload, nil
+function expandhome(secrets)
+  local home = sh.env "HOME"
+  local files = {}
+  for f, payload in pairs(secrets) do
+    local file = f:gsub("^~", home)
+    files[file] = payload
+  end
+  return files
 end
+ocisecrets = expandhome(ocisecrets)
 
 -- Write output files from CI secrets
 b64 = require 'base64'
-for file, payload in pairs(jsonsecrets) do
+for file, payload in pairs(ocisecrets) do
   file = assert( io.open(file, 'wb') )
   file:write(b64.decode(payload))
 end
