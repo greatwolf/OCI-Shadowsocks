@@ -12,6 +12,7 @@ sh 'bash install.sh --accept-all-defaults'
 -- Copy OCI config to right place
 sh 'mkdir -p ~/.oci'
 sh 'cp ./config ~/.oci/'
+sh 'chmod 600 ~/.oci/config'
 
 -- Copy OCI ssh privatekey auth to right place
 json = require 'dkjson'
@@ -34,4 +35,6 @@ b64 = require 'base64'
 for file, payload in pairs(ocisecrets) do
   file = assert( io.open(file, 'wb') )
   file:write(b64.decode(payload))
+  file:close()
+  sh('chmod 600 ' .. file)
 end
