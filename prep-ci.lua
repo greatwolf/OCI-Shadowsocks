@@ -12,7 +12,7 @@ sh 'bash install.sh --accept-all-defaults'
 -- Copy OCI config to right place
 sh 'mkdir -p ~/.oci'
 sh 'cp ./config ~/.oci/'
-sh 'chmod 600 ~/.oci/config'
+sh 'chmod 600 ~/.oci/config'  -- tighten permissions so oci doesn't complain
 
 -- Copy OCI ssh privatekey auth to right place
 json = require 'dkjson'
