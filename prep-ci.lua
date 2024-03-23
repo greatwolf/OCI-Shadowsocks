@@ -32,9 +32,9 @@ ocisecrets = expandhome(ocisecrets)
 
 -- Write output files from CI secrets
 b64 = require 'base64'
-for file, payload in pairs(ocisecrets) do
-  file = assert( io.open(file, 'wb') )
+for f, payload in pairs(ocisecrets) do
+  file = assert( io.open(f, 'wb') )
   file:write(b64.decode(payload))
   file:close()
-  sh('chmod 600 ' .. file)
+  sh('chmod 600 ' .. f)
 end
