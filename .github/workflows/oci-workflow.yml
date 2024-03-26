@@ -37,7 +37,7 @@ jobs:
           detached: true
 
       - name: Add Extra Pathing
-        run: echo "~/bin" >> $GITHUB_PATH
+        run: echo "$HOME/bin" >> $GITHUB_PATH
 
       - name: Check PATH
         run: |
