@@ -6,12 +6,20 @@ function oci(...)
   local result = assert(shout(cmd))
   return json.decode(result)
 end
-function dump(t)
-  print '{'
+function dump(t, indent)
+  indent = indent or 0
+  local ws = string.rep(' ', indent) .. '%s'
+  local kv = "  %s = %s"
+  print (ws:format'{')
   for k, v in pairs(t) do
-    print(k, '=', v)
+    if type(v) == 'table' then
+      print(ws:format("  " .. k .. " = "))
+      dump(v, indent + 2)
+    else
+      print(ws:format(kv:format(k, v))
+    end
   end
-  print '}'
+  print (ws:format'}')
 end
 
 -- get compartment-id & availability-domain
