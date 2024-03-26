@@ -40,15 +40,20 @@ jobs:
         run: echo "~/bin" >> $GITHUB_PATH
 
       - name: Check PATH
-        run: echo ENV PATH = $PATH
+        run: |
+          echo ENV PATH = $PATH
 
       - name: Install Lua
-        run: sudo apt-get install lua5.4
+        run: |
+          echo ENV PATH = $PATH
+          sudo apt-get install lua5.4
 
       - name: Prep CI environment
         run: |
+          echo ENV PATH = $PATH
           lua prep-ci.lua
 
       - name: Do OCI public ip renewal
         run: |
+          echo ENV PATH = $PATH
           lua oci-iprenew.lua
