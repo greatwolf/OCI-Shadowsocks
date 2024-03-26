@@ -24,7 +24,6 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     env:
-      PATH: ~/bin:$PATH
       OCI_SECRETS: ${{ secrets.OCISECRETS }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -42,6 +41,7 @@ jobs:
 
       - name: Prep CI environment
         run: |
+          export PATH=~/bin:$PATH
           lua prep-ci.lua
 
       - name: Do OCI public ip renewal
