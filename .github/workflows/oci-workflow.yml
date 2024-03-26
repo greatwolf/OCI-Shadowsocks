@@ -41,6 +41,7 @@ jobs:
 
       - name: Prep CI environment
         run: |
+          echo "~/bin" >> $GITHUB_PATH
           lua prep-ci.lua
 
       - name: Do OCI public ip renewal
