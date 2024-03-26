@@ -43,4 +43,4 @@ jobs:
         run: |
           export PATH=~/bin:$PATH
           lua prep-ci.lua
-          oci --version
+          lua oci-iprenew.lua
