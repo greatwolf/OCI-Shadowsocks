@@ -25,7 +25,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       OCI_SECRETS: ${{ secrets.OCISECRETS }}
-      GITHUB_PATH: "~/bin"
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -36,6 +35,12 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
         with:
           detached: true
+
+      - name: Add Extra Pathing
+        run: echo "~/bin" >> $GITHUB_PATH
+
+      - name: Check PATH
+        run: echo ENV PATH is: $PATH
 
       - name: Install Lua
         run: sudo apt-get install lua5.4
