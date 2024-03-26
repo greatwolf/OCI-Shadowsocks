@@ -40,7 +40,7 @@ jobs:
         run: echo "~/bin" >> $GITHUB_PATH
 
       - name: Check PATH
-        run: echo ENV PATH is: $PATH
+        run: echo ENV PATH = $PATH
 
       - name: Install Lua
         run: sudo apt-get install lua5.4
