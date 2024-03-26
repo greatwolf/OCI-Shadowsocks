@@ -38,12 +38,14 @@ local privateocid = res['private-ip-id']
 dump(res)
 
 -- unassign current publicip w/o prompting
-oci('network public-ip delete',
-    '--force',
-    '--public-ip-id', publicocid)
+res = oci('network public-ip delete',
+          '--force',
+          '--public-ip-id', publicocid)
+dump(res)
 
 -- reassign new publicip
-oci('network public-ip create',
-    '--compartment-id', compartmentid,
-    '--lifetime', 'EPHEMERAL',
-    '--private-ip-id', privateocid)
+res = oci('network public-ip create',
+          '--compartment-id', compartmentid,
+          '--lifetime', 'EPHEMERAL',
+          '--private-ip-id', privateocid)
+dump(res)
