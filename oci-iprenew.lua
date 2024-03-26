@@ -4,8 +4,11 @@ json = require 'dkjson'
 function oci(...)
   local cmd = table.concat({'oci', ...}, ' ')
   local result = assert(shout(cmd))
-  result = json.decode(result)
-  return result and result.data[1] or {}
+  result = json.decode(result) or {}
+
+  if result.data then result = result.data end
+  if #result == 1 then result = result[1] end
+  return result
 end
 
 function dump(t, indent)
@@ -37,6 +40,7 @@ res = oci('network public-ip list',
           '--lifetime', 'EPHEMERAL')
 local publicocid = res.id
 local privateocid = res['private-ip-id']
+print "Current Public IP:"
 dump(res)
 
 if not publicocid then
@@ -58,4 +62,5 @@ res = oci('network public-ip create',
           '--compartment-id', compartmentid,
           '--lifetime', 'EPHEMERAL',
           '--private-ip-id', privateocid)
+print "New Public IP:"
 dump(res)
