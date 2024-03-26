@@ -15,7 +15,7 @@ function dump(t)
 end
 
 -- get compartment-id & availability-domain
-local res = oci 'iam availability-domain list'
+local res = oci 'iam availability-domain list'.data[1]
 local compartmentid = res["compartment-id"]
 local availdomain   = res.name
 
