@@ -25,6 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       OCI_SECRETS: ${{ secrets.OCISECRETS }}
+      GITHUB_PATH: "~/bin"
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -41,7 +42,6 @@ jobs:
 
       - name: Prep CI environment
         run: |
-          echo "~/bin" >> $GITHUB_PATH
           lua prep-ci.lua
 
       - name: Do OCI public ip renewal
