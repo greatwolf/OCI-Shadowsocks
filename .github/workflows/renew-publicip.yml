@@ -41,4 +41,6 @@ jobs:
 
       - name: Prep CI environment
         run: |
+          export PATH=~/bin:$PATH
           lua prep-ci.lua
+          oci --version
