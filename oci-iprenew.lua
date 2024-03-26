@@ -16,7 +16,7 @@ function dump(t, indent)
       print(ws:format("  " .. k .. " = "))
       dump(v, indent + 2)
     else
-      print(ws:format(kv:format(k, v))
+      print(ws:format(kv:format(k, v)))
     end
   end
   print (ws:format'}')
