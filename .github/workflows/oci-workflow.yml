@@ -36,22 +36,16 @@ jobs:
         with:
           detached: true
 
-      - name: Add Extra Pathing
-        run: echo "$HOME/bin" >> $GITHUB_PATH
-
-      - name: Check PATH
-        run: |
-          echo ENV PATH = $PATH
+#      - name: Add Extra Pathing
+#        run: echo "$HOME/bin" >> $GITHUB_PATH
 
       - name: Install Lua
-        run: |
-          echo ENV PATH = $PATH
-          sudo apt-get install lua5.4
+        run: sudo apt-get install lua5.4
 
       - name: Prep CI environment
         run: |
-          echo ENV PATH = $PATH
           lua prep-ci.lua
+          echo ENV PATH = $PATH
 
       - name: Do OCI public ip renewal
         run: |
