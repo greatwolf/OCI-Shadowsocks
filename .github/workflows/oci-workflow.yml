@@ -43,4 +43,7 @@ jobs:
         run: |
           export PATH=~/bin:$PATH
           lua prep-ci.lua
+
+      - name: Do OCI public ip renewal
+        run: |
           lua oci-iprenew.lua
