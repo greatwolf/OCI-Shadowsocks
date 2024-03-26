@@ -4,8 +4,10 @@ json = require 'dkjson'
 function oci(...)
   local cmd = table.concat({'oci', ...}, ' ')
   local result = assert(shout(cmd))
-  return json.decode(result)
+  result = json.decode(result).data or {}
+  return result[1] or result
 end
+
 function dump(t, indent)
   indent = indent or 0
   local ws = string.rep(' ', indent) .. '%s'
@@ -23,7 +25,7 @@ function dump(t, indent)
 end
 
 -- get compartment-id & availability-domain
-local res = oci 'iam availability-domain list'.data[1]
+local res = oci 'iam availability-domain list'
 local compartmentid = res["compartment-id"]
 local availdomain   = res.name
 
@@ -32,15 +34,24 @@ res = oci('network public-ip list',
           '--compartment-id', compartmentid,
           '--scope AVAILABILITY_DOMAIN',
           '--availability-domain', availdomain,
-          '--lifetime', 'EPHEMERAL').data[1]
+          '--lifetime', 'EPHEMERAL')
 local publicocid = res.id
 local privateocid = res['private-ip-id']
 dump(res)
 
--- unassign current publicip w/o prompting
-oci('network public-ip delete',
-    '--force',
-    '--public-ip-id', publicocid)
+if not publicocid then
+  res = oci('compute vnic-attachment list',
+            '--compartment-id', compartmentid)
+  local vnicocid = res['vnic-id']
+  res = oci('network private-ip list',
+            '--vnic-id', vnicocid)
+  privateocid = res.id
+else
+  -- unassign current publicip w/o prompting
+  oci('network public-ip delete',
+      '--force',
+      '--public-ip-id', publicocid)
+end
 
 -- reassign new publicip
 res = oci('network public-ip create',
