@@ -38,10 +38,9 @@ local privateocid = res['private-ip-id']
 dump(res)
 
 -- unassign current publicip w/o prompting
-res = oci('network public-ip delete',
-          '--force',
-          '--public-ip-id', publicocid)
-dump(res)
+oci('network public-ip delete',
+    '--force',
+    '--public-ip-id', publicocid)
 
 -- reassign new publicip
 res = oci('network public-ip create',
