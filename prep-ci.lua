@@ -14,9 +14,14 @@ sh 'mkdir -p ~/.oci'
 sh 'cp ./config ~/.oci/'
 sh 'chmod 600 ~/.oci/config'  -- tighten permissions so oci doesn't complain
 
+-- Add "~/bin" to env PATH so oci's accessible
+local GH_PATH = io.open(sh.env "GITHUB_PATH", 'ab')
+GH_PATH:write("~/bin")
+GH_PATH:close()
+
 -- Copy OCI ssh privatekey auth to right place
 json = require 'dkjson'
-local ocisecrets = assert(json.decode(os.getenv "OCI_SECRETS"))
+local ocisecrets = assert(json.decode(sh.env "OCI_SECRETS"))
 
 -- Replace '~' with HOME directory
 function expandhome(secrets)
