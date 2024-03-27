@@ -50,6 +50,8 @@ jobs:
           touch test.lua
           git add .
           git commit -m "test msg"
+          git config --global user.email "github.greatwolf@mamber.net"
+          git config --global user.name "greatwolf"
           git push
 
 #      - name: Do OCI public ip renewal
