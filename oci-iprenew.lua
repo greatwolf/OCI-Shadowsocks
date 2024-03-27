@@ -43,6 +43,9 @@ local privateocid = res['private-ip-id']
 print "Current Public IP:"
 dump(res)
 
+-- only do a 'public-ip delete' if compute instance has a public ip assigned
+-- otherwise get private-ip ocid from compute instance's vnic
+-- this is needed for 'public-ip create' below
 if not publicocid then
   res = oci('compute vnic-attachment list',
             '--compartment-id', compartmentid)
