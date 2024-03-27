@@ -39,9 +39,16 @@ jobs:
       - name: Install Lua
         run: sudo apt-get install lua5.4
 
-      - name: Prep CI environment
-        run: lua prep-ci.lua
-
-      - name: Do OCI public ip renewal
+      - name: Test git commit push
         run: |
-          lua oci-iprenew.lua
+          touch test.lua
+          git add .
+          git commit -m test msg
+          git push
+
+#      - name: Prep CI environment
+#        run: lua prep-ci.lua
+
+#      - name: Do OCI public ip renewal
+#        run: |
+#          lua oci-iprenew.lua
