@@ -3,7 +3,7 @@ require 'sh'
 
 -- download base64 and json lua libraries
 sh 'sudo wget --directory-prefix=/usr/local/share/lua/5.4 https://raw.githubusercontent.com/iskolbin/lbase64/master/base64.lua'
-sh 'sudo wget -O $HOME/dkjson.lua http://dkolf.de/dkjson-lua/dkjson-2.7.lua'
+sh 'sudo wget -O /usr/local/share/lua/5.4/dkjson.lua http://dkolf.de/dkjson-lua/dkjson-2.7.lua'
 
 -- Install OCI
 sh 'wget --directory-prefix=$HOME https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh'
