@@ -45,15 +45,6 @@ jobs:
       - name: Prep CI environment
         run: lua prep-ci.lua
 
-      - name: Test git commit push
-        run: |
-          touch test.lua
-          git add .
-          git commit -m "test msg"
-          git config --global user.email "github.greatwolf@mamber.net"
-          git config --global user.name "greatwolf"
-          git push
-
 #      - name: Do OCI public ip renewal
 #        run: |
 #          lua oci-iprenew.lua
