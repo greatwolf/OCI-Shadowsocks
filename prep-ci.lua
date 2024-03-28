@@ -14,6 +14,10 @@ sh 'mkdir -p ~/.oci'
 sh 'cp ./config ~/.oci/'
 sh 'chmod 600 ~/.oci/config'  -- tighten permissions so oci doesn't complain
 
+-- Set user and email for git
+sh 'git config --global user.name "greatwolf"'
+sh 'git config --global user.email "github.greatwolf@mamber.net"'
+
 -- Add "~/bin" to env PATH so oci's accessible
 local GH_PATH = io.open(sh.env "GITHUB_PATH", 'ab')
 GH_PATH:write(sh.env "HOME" .. "/bin")
