@@ -1,7 +1,6 @@
 [DEFAULT]
 user = ocid1.user.oc1..aaaaaaaas4bxpl2krfnegqactkpgysx244p7pgeenr4jdt5qq7ws6oddrsta
-fingerprint = 4f:35:eb:bd:e7:27:ac:ca:20:a9:bc:1d:c8:7c:65:94
+fingerprint = e1:60:c6:93:d3:40:44:03:ce:1c:0a:14:ab:9f:8a:a8
 tenancy = ocid1.tenancy.oc1..aaaaaaaagyi66dc4o2cawmj4fclkpffuc6igwpx5aqh34mrcyx6qof6trs7a
 region = ap-osaka-1
 key_file = ~/.oci/oci_api_key.pem
-pass_phrase = 123
