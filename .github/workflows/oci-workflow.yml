@@ -45,6 +45,6 @@ jobs:
       - name: Prep CI environment
         run: lua prep-ci.lua
 
-      - name: Do OCI public ip renewal
+      - name: Renew OCI public ip
         run: |
           lua renew-oci-ip.lua
