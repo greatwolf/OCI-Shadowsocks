@@ -1,5 +1,5 @@
 #!/usr/bin/env lua
-require 'sh'
+require 'util.sh'
 
 -- download base64 and json lua libraries
 sh 'sudo wget --directory-prefix=/usr/local/share/lua/5.4 https://raw.githubusercontent.com/iskolbin/lbase64/master/base64.lua'

@@ -1,4 +1,4 @@
-require 'sh'
+require 'util.sh'
 json = require 'dkjson'
 
 function oci(...)
