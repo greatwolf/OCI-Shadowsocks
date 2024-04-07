@@ -1,31 +1,7 @@
 require 'util.sh'
+require 'util.oci'
+require 'util.dump'
 json = require 'dkjson'
-
-function oci(...)
-  local cmd = table.concat({'oci', ...}, ' ')
-  local result = assert(shout(cmd))
-  result = json.decode(result) or {}
-
-  if result.data then result = result.data end
-  if #result == 1 then result = result[1] end
-  return result
-end
-
-function dump(t, indent)
-  indent = indent or 0
-  local ws = string.rep(' ', indent) .. '%s'
-  local kv = "  %s = %s"
-  print (ws:format'{')
-  for k, v in pairs(t) do
-    if type(v) == 'table' then
-      print(ws:format("  " .. k .. " = "))
-      dump(v, indent + 2)
-    else
-      print(ws:format(kv:format(k, v)))
-    end
-  end
-  print (ws:format'}')
-end
 
 -- get compartment-id & availability-domain
 local res = oci 'iam availability-domain list'
