@@ -16,7 +16,7 @@ res = oci('network public-ip list',
           '--lifetime', 'EPHEMERAL')
 local publicip = res['ip-address']
 
-local cmd    = "curl --key $HOME/.oci/oci_api_key.pem sftp://ubuntu@%s/etc/shadowsocks-rust/config.json"
+local cmd    = "curl --insecure --key $HOME/.oci/oci_api_key.pem sftp://ubuntu@%s/etc/shadowsocks-rust/config.json"
 local config = shout(cmd:format(publicip))
 config = assert(json.decode(config))
 dump(config)
