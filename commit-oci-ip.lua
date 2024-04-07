@@ -49,3 +49,4 @@ file:close()
 sh 'git status'
 sh 'git add *.txt'
 sh 'git commit -m "Updated oci public ip"'
+sh 'git push'
