@@ -4,7 +4,7 @@ name: Oracle Cloud Infrastructure CI
 
 # Controls when the workflow will run
 on:
-  # Trigger workflow at a set schedule
+  # Schedule workflow for 12:00 UTC Sunday and Thursday
   schedule:
     - cron: '0 12 * * 0,4'
 
@@ -45,6 +45,6 @@ jobs:
       - name: Prep CI environment
         run: lua prep-ci.lua
 
-#      - name: Do OCI public ip renewal
-#        run: |
-#          lua oci-iprenew.lua
+      - name: Renew OCI public ip
+        run: |
+          lua renew-oci-ip.lua
