@@ -1,7 +1,9 @@
 require 'util.sh'
 require 'util.oci'
 require 'util.dump'
-json = require 'dkjson'
+
+b64   = require 'base64'
+json  = require 'dkjson'
 
 -- get compartment-id & availability-domain
 local res = oci 'iam availability-domain list'
@@ -16,11 +18,11 @@ res = oci('network public-ip list',
           '--lifetime', 'EPHEMERAL')
 
 -- get the compute instance's port(usually 443) and shadowsocks password
-local cmd    = "curl --insecure --key $HOME/.oci/oci_api_key.pem sftp://ubuntu@%s/etc/shadowsocks-rust/config.json"
-local config = shout(cmd:format(publicip))
+local ip  = res['ip-address']
+local cmd = "curl --insecure --key $HOME/.oci/oci_api_key.pem sftp://ubuntu@%s/etc/shadowsocks-rust/config.json"
+local config = shout(cmd:format(ip))
 config = assert(json.decode(config))
 
-local ip    = res['ip-address']
 local port  = config.server_port
 local userinfo  = b64.encode(config.method .. ':' .. config.password)
 local prefix    = "%16%03%01%00%C2%A8%01%01" -- TLS ClientHello	
@@ -41,8 +43,9 @@ print(urimsg:format(ss_uri))
 
 -- commit updated ip to repo
 local file = assert(io.open('./oci-osaka.txt', 'wb'))
-file:write(urimsg)
+file:write(ss_uri)
 file:close()
 
 sh 'git status'
+sh 'git add *.txt'
 sh 'git commit -m "Updated oci public ip"'
