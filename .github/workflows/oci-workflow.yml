@@ -49,5 +49,6 @@ jobs:
         run: lua renew-oci-ip.lua
 
       - name: Commit updated ip back to repo
-        run: lua commit-oci-ip.lua
+        run: |
+          lua commit-oci-ip.lua
       
