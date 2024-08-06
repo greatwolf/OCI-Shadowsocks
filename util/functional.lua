@@ -2,9 +2,6 @@ local functional = {}
 local mt = {__index = functional}
 
 function functional.makeseq(seq)
-  if #seq == 0 and next(seq) then
-    return setmetatable({seq}, mt)
-  end
   return setmetatable(seq, mt)
 end
 

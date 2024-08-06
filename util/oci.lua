@@ -4,6 +4,5 @@ function oci(...)
   result = json.decode(result) or {}
 
   if result.data then result = result.data end
-  if #result == 1 then result = result[1] end
   return result
 end
