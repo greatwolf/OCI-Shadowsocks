@@ -63,6 +63,7 @@ function RenewPublicIP(iam)
               end)
   local vnics_set = instances:reduce(function(set, n)
                       set[n.vnicocid] = true
+                      return set
                     end, {})
   -- assumption is all compute instances are on same subnet
   -- lookup by 'subnet-id' to avoid multiple api calls
