@@ -22,11 +22,6 @@ sh 'chmod 600 ~/.oci/config'  -- tighten permissions so oci doesn't complain
 sh 'git config --global user.name "greatwolf"'
 sh 'git config --global user.email "github.greatwolf@mamber.net"'
 
--- Add "~/bin" to env PATH so oci's accessible
-local GH_PATH = io.open(sh.env "GITHUB_PATH", 'ab')
-GH_PATH:write(sh.env "HOME" .. "/bin")
-GH_PATH:close()
-
 -- Copy OCI ssh privatekey auth to right place
 json = require 'dkjson'
 local secret_env  = sh.env "OCI_SECRETS"
