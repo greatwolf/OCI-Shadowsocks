@@ -6,8 +6,12 @@ sh 'sudo wget --directory-prefix=/usr/local/share/lua/5.4 https://raw.githubuser
 sh 'sudo wget -O /usr/local/share/lua/5.4/dkjson.lua http://dkolf.de/dkjson-lua/dkjson-2.7.lua'
 
 -- Install OCI
-sh 'wget --directory-prefix=$HOME https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh'
-sh 'bash $HOME/install.sh --accept-all-defaults'
+sh
+[[
+  wget -NO - \
+  https://github.com/oracle/oci-cli/releases/download/v3.45.0/oci-cli-3.45.0.zip | jar x
+]]
+sh 'pip3 install ./oci-cli/oci_cli-3.45.0-py3-none-any.whl'
 
 -- Copy OCI config to right place
 sh 'mkdir -p ~/.oci'
