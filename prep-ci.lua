@@ -29,7 +29,13 @@ GH_PATH:close()
 
 -- Copy OCI ssh privatekey auth to right place
 json = require 'dkjson'
-local ocisecrets = assert(json.decode(sh.env "OCI_SECRETS"))
+local secret_env  = sh.env "OCI_SECRETS"
+local secret_file = io.open '/content/drive/MyDrive/OCI_SECRETS'
+if secret_file then
+  secret_file = secret_file:read '*all'
+end
+local ocisecrets = assert(secret_env or secret_file, "Could not find OCI_SECRETS")
+ocisecrets = assert(json.decode(ocisecrets), "Could not parse OCI_SECRETS")
 
 -- Replace '~' with HOME directory
 function expandhome(secrets)
