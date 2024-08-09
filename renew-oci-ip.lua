@@ -1,12 +1,7 @@
 require 'util.sh'
 require 'util.oci'
 require 'util.dump'
-f = require 'util.functional'
 json = require 'dkjson'
-
-local oci = function(...)
-  return f.makeseq(oci(...))
-end
 
 function GetIAMInfo()
   -- get compartment-id & availability-domain

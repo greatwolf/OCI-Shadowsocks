@@ -1,7 +1,7 @@
 local functional = {}
 local mt = {__index = functional}
 
-function functional.makeseq(seq)
+function functional.list(seq)
   return setmetatable(seq, mt)
 end
 
