@@ -84,6 +84,14 @@ function RenewPublicIP(iam)
                                   '--private-ip-id', v.privateocid)
                   return res
                 end)
+                :map(function(v)
+                  return
+                  {
+                    publicocid  = v.id,
+                    privateocid = v['private-ip-id'],
+                    publicip    = v['ip-address']
+                  }
+                end)
   print "Renewed Public IP:"
   dump(privateocid)
 end
