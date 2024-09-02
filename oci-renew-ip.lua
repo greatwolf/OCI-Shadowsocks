@@ -1,3 +1,4 @@
+#!/usr/bin/env lua
 require 'util.sh'
 require 'util.oci'
 require 'util.dump'
