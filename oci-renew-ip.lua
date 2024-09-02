@@ -7,19 +7,19 @@ json = require 'dkjson'
 function GetIAMInfo()
   -- get compartment-id & availability-domain
   local iam = oci 'iam availability-domain list'
-  iam = iam:map(function(v)
+  return iam:map(function(v)
           return
           {
             availdomain = v.name,
             compartmentid = v["compartment-id"]
           }
         end)
-  return table.remove(iam)
 end
 
 function ReleasePublicIP(iam)
   -- note, only instances having a public-ip is returned
   local res = oci('network public-ip list',
+                  '--all',
                   '--compartment-id', iam.compartmentid,
                   '--scope AVAILABILITY_DOMAIN',
                   '--availability-domain', iam.availdomain,
@@ -34,6 +34,7 @@ function ReleasePublicIP(iam)
           }
         end)
 
+  print(iam.availdomain)
   print "Releasing Public IP:"
   dump(res)
 
@@ -93,10 +94,12 @@ function RenewPublicIP(iam)
                     publicip    = v['ip-address']
                   }
                 end)
+
+  print(iam.availdomain)
   print "Renewed Public IP:"
   dump(privateocid)
 end
 
 local iam = GetIAMInfo()
-ReleasePublicIP(iam)
-RenewPublicIP(iam)
+iam:map(ReleasePublicIP)
+iam:map(RenewPublicIP)
