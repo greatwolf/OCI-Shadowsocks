@@ -1,3 +1,4 @@
+-- Basic table dump to stdout
 function dump(t, indent, crumb)
   indent = indent or 0
   crumb = crumb or {}

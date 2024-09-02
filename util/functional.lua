@@ -1,3 +1,4 @@
+-- Implement basic map, filter, reduce higher-order functions
 local functional = {}
 local mt = {__index = functional}
 
