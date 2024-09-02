@@ -4,9 +4,13 @@ require 'util.functional'
 local json  = require 'dkjson'
 
 function oci(...)
-  local cmd = table.concat({'oci', ...}, ' ')
+  local params = table.concat({...}, ' ')
+  local cmd = ("oci %s 2>&1"):format(params)
+
   local result = assert(sh.out(cmd))
-  result = json.decode(result) or {}
+  result = json.decode(result)
+        or json.decode(result:match "^ServiceError:(.+)")
+        or {}
 
   return functional.list(result.data or result)
 end
