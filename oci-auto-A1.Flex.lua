@@ -40,7 +40,7 @@ local res = oci('compute instance launch',
 log(res)
 
 while res.message == "Out of host capacity." do
-  sh 'sleep 30'
+  sh 'sleep 60'
   res = oci('compute instance launch',
             '--no-retry',
             params)
