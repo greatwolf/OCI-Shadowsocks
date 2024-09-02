@@ -43,12 +43,12 @@ jobs:
         run: sudo apt-get install lua5.4
 
       - name: Prep CI environment
-        run: lua prep-ci.lua
+        run: lua oci-prep-setup.lua
 
       - name: Renew OCI public ip
-        run: lua renew-oci-ip.lua
+        run: lua oci-renew-ip.lua
 
       - name: Commit updated ip back to repo
         run: |
-          lua commit-oci-ip.lua
+          lua oci-publish-ip.lua
       
