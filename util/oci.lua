@@ -1,4 +1,7 @@
+-- Simple wrapper for invoking oci-cli
 local functional = require 'util.functional'
+local sh    = require 'util.sh'
+local json  = require 'dkjson'
 
 function oci(...)
   local cmd = table.concat({'oci', ...}, ' ')
