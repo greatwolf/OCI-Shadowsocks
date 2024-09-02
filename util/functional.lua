@@ -1,5 +1,5 @@
 -- Implement basic map, filter, reduce higher-order functions
-local functional = {}
+functional = {}
 local mt = {__index = functional}
 
 function functional.list(seq)

@@ -1,6 +1,6 @@
 -- Simple wrapper for invoking oci-cli
-local functional = require 'util.functional'
-local sh    = require 'util.sh'
+require 'util.sh'
+require 'util.functional'
 local json  = require 'dkjson'
 
 function oci(...)
