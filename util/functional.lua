@@ -6,6 +6,14 @@ function functional.list(seq)
   return setmetatable(seq, mt)
 end
 
+function functional.foreach(seq, op)
+  assert(type(op) == 'function')
+
+  for i, v in ipairs(seq) do
+    op(v, i)
+  end
+end
+
 function functional.map(seq, pred)
   assert(type(pred) == 'function')
 
