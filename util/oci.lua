@@ -9,8 +9,7 @@ function oci(...)
 
   local result = assert(sh.out(cmd))
   result = json.decode(result)
-        or json.decode(result:match "^ServiceError:(.+)")
-        or {}
+        or json.decode(result:match "^ServiceError:(.+)" or "{}")
 
   return functional.list(result.data or result)
 end
