@@ -23,7 +23,7 @@ local ss_uri  = instances
                 :map(function(v)
                   local ip = v['public-ip']
                   local cmd = "curl -s --insecure --key $HOME/.oci/oci_api_key.pem sftp://ubuntu@%s/etc/shadowsocks-rust/config.json"
-                  local config = shout(cmd:format(ip))
+                  local config = sh.out(cmd:format(ip))
                   config = assert(json.decode(config))
                   config.ip = ip
                   return config
