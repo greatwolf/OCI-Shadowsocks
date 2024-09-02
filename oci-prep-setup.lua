@@ -1,11 +1,11 @@
 #!/usr/bin/env lua
 require 'util.sh'
 
--- download base64 and json lua libraries
+-- download base64 and dkjson for lua
 sh 'sudo wget --directory-prefix=/usr/local/share/lua/5.4 https://raw.githubusercontent.com/iskolbin/lbase64/master/base64.lua'
 sh 'sudo wget -O /usr/local/share/lua/5.4/dkjson.lua http://dkolf.de/dkjson-lua/dkjson-2.7.lua'
 
--- Install OCI
+-- Install OCI-CLI
 sh
 [[
   wget -NO - \
@@ -14,9 +14,7 @@ sh
 sh 'pip3 install ./oci-cli/oci_cli-3.45.0-py3-none-any.whl'
 
 -- Copy OCI config to right place
-sh 'mkdir -p ~/.oci'
-sh 'cp ./config ~/.oci/'
-sh 'chmod 600 ~/.oci/config'  -- tighten permissions so oci doesn't complain
+dofile 'oci-config-swap.lua'
 
 -- Set user and email for git
 sh 'git config --global user.name "greatwolf"'

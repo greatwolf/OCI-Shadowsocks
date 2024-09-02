@@ -43,7 +43,7 @@ jobs:
         run: sudo apt-get install lua5.4
 
       - name: Prep CI environment
-        run: lua oci-prep-setup.lua
+        run: lua oci-prep-setup.lua config.osaka
 
       - name: Renew OCI public ip
         run: lua oci-renew-ip.lua
