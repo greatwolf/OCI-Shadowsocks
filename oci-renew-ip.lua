@@ -102,4 +102,6 @@ end
 
 local iam = GetIAMInfo()
 iam:map(ReleasePublicIP)
+
+sh 'sleep 5'  -- wait a little to ensure ip is really released
 iam:map(RenewPublicIP)
