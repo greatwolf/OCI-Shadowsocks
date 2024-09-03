@@ -61,7 +61,7 @@ local configs = iam
                 :map(stringify)
 
 local log do
-  local logfmt = "%s %s Status: %d Message: %s"
+  local logfmt = "%s %s (%d) %s"
   log = function(resp)
     local line  = logfmt:format(os.date '[%m/%d %H:%M:%S]',
                                 resp.request_endpoint,
