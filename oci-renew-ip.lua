@@ -7,13 +7,13 @@ json = require 'dkjson'
 function GetIAMInfo()
   -- get compartment-id & availability-domain
   local iam = oci 'iam availability-domain list'
-  return iam:map(function(v)
-          return
-          {
-            availdomain = v.name,
-            compartmentid = v["compartment-id"]
-          }
-        end)
+  return  iam:map(function(v)
+            return
+            {
+              availdomain = v.name,
+              compartmentid = v["compartment-id"]
+            }
+          end)
 end
 
 function ReleasePublicIP(iam)
