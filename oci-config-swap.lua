@@ -2,7 +2,11 @@
 require 'util.sh'
 
 -- check config file exist
-assert(type(arg[1]) == 'string', "No config file given")
+assert(type(arg[1]) == 'string',
+[[
+  Pass in config file to use
+      eg. ./oci-config-swap.lua config.ashburn
+]])
 assert(io.open(arg[1])):close()
 
 -- Copy OCI config to right place
