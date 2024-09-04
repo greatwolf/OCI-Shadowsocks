@@ -1,24 +1,12 @@
 #!/usr/bin/env lua
 require 'util.sh'
 
--- download base64 and dkjson for lua
+-- Download base64 and dkjson for lua
 sh 'sudo wget --directory-prefix=/usr/local/share/lua/5.4 https://raw.githubusercontent.com/iskolbin/lbase64/master/base64.lua'
 sh 'sudo wget -O /usr/local/share/lua/5.4/dkjson.lua http://dkolf.de/dkjson-lua/dkjson-2.7.lua'
 
--- Install OCI-CLI
-sh
-[[
-  wget -NO - \
-  https://github.com/oracle/oci-cli/releases/download/v3.45.0/oci-cli-3.45.0.zip | jar x
-]]
-sh 'pip3 install ./oci-cli/oci_cli-3.45.0-py3-none-any.whl'
-
--- Copy OCI config to right place
+-- Pick up OCI config from 'arg' and copy to right place
 dofile 'oci-config-swap.lua'
-
--- Set user and email for git
-sh 'git config --global user.name "greatwolf"'
-sh 'git config --global user.email "github.greatwolf@mamber.net"'
 
 -- Copy OCI ssh privatekey auth to right place
 json = require 'dkjson'
@@ -50,3 +38,15 @@ for f, payload in pairs(ocisecrets) do
   file:close()
   sh('chmod 600 ' .. f)
 end
+
+-- Set user and email for git
+sh 'git config --global user.name "greatwolf"'
+sh 'git config --global user.email "github.greatwolf@mamber.net"'
+
+-- Download and Install OCI-CLI
+sh
+[[
+  wget -NO - \
+  https://github.com/oracle/oci-cli/releases/download/v3.45.0/oci-cli-3.45.0.zip | jar x
+]]
+sh 'pip3 install ./oci-cli/oci_cli-3.45.0-py3-none-any.whl'
