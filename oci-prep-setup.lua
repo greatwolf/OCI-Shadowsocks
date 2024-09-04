@@ -2,8 +2,8 @@
 require 'util.sh'
 
 -- Download base64 and dkjson for lua
-sh 'sudo wget --directory-prefix=/usr/local/share/lua/5.4 https://raw.githubusercontent.com/iskolbin/lbase64/master/base64.lua'
-sh 'sudo wget -O /usr/local/share/lua/5.4/dkjson.lua http://dkolf.de/dkjson-lua/dkjson-2.7.lua'
+sh 'sudo wget -N --directory-prefix=/usr/local/share/lua/5.4 https://raw.githubusercontent.com/iskolbin/lbase64/master/base64.lua'
+sh 'sudo wget -NO /usr/local/share/lua/5.4/dkjson.lua http://dkolf.de/dkjson-lua/dkjson-2.7.lua'
 
 -- Pick up OCI config from 'arg' and copy to right place
 dofile 'oci-config-swap.lua'
