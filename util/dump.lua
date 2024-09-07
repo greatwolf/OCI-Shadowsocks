@@ -7,11 +7,9 @@ function dump(t, indent, crumb)
   local kv = "  %s = %s"
   print (ws:format'{')
   for k, v in pairs(t) do
+    print(ws:format(kv:format(k, tostring(v))))
     if type(v) == 'table' and not crumb[v] then
-      print(ws:format("  " .. k .. " = "))
       dump(v, indent + 2, crumb)
-    else
-      print(ws:format(kv:format(k, v)))
     end
   end
   print (ws:format'}')
